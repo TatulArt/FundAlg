@@ -1,0 +1,158 @@
+#include "../include/myMath.h"
+
+#include <ctype.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ULL_T unsigned long long
+
+// Перевод x в long из строкового представления
+long convertStrToLong(const char *str) {
+    char *p;
+    const long conv = strtol(str, &p, 10);
+
+    // Ловим ошибки при переводе
+    if (*p != '\0' || conv > INT_MAX || conv < INT_MIN) {
+        return INT_MAX;
+    }
+
+    return conv;
+}
+
+int validateNumInStr(const char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '-') {
+            return -1;
+        }
+    }
+
+    if (str[0] == '0') {
+        return -1;
+    }
+
+    return 0;
+}
+
+int validateFlag(const char *flag) {
+    if (flag[0] != '-' && flag[0] != '/') {
+        return -1;
+    }
+
+    if (!(flag[1] >= 'a' && flag[1] <= 'z') || flag[2] != '\0') {
+        return -2;
+    }
+
+    return 0;
+}
+
+// Вывод всех чисел в пределах 100 (включительно), кратных x в терминал
+int printNumsDivisibleByX(const long x) {
+    int counter = 0;
+
+    for (int i = 1; i <= 100; i++) {
+        if ((i % x) == 0) {
+            printf("%d\n", i);
+            counter++;
+        }
+    }
+
+    return counter;
+}
+
+// Проверка числа на простоту
+int isPrime(const long x) {
+    for (long i = 2; i <= x / 2; i++)
+        if (x % i == 0)
+            return 0;
+
+    return 1;
+}
+
+int getNumLengthInNumSys(long x, const int base) {
+    int counter = 0;
+
+    while (x > 0) {
+        x /= base;
+        counter++;
+    }
+
+    return counter;
+}
+
+void printNumInHex(long x) {
+    int n = getNumLengthInNumSys(x, 16);
+    char *result = (char *) malloc(n * sizeof(char));
+
+    const char *alphabet = "0123456789ABCDEF";
+    int counter = 0;
+
+    while (x > 0) {
+        result[counter] = alphabet[x % 16];
+        counter++;
+        x /= 16;
+    }
+
+    for (int i = counter - 1; i >= 0; i--) {
+        printf("%c ", result[i]);
+    }
+
+    printf("\n");
+    free(result);
+}
+
+void printPowerTableXRow(const long x) {
+    long *row = (long *) malloc(10 * sizeof(long));
+
+    for (int i = 0; i < 10; i++) {
+        row[i] = i + 1;
+        printf("%ld", row[i]);
+
+        for (int j = 0; j <= 2 + x / 2; j++) {
+            printf(" ");
+        }
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < (x - 1); i++) {
+        for (int j = 0; j < 10; j++) {
+            row[j] = row[j] * (j + 1);
+            printf("%ld ", row[j]);
+
+            for (int t = 0; t <= (x - i) / 2; t++) {
+                printf(" ");
+            }
+        }
+
+        printf("\n");
+    }
+
+    free(row);
+}
+
+ULL_T getSumFromOneToX(const long x) {
+    ULL_T sum = 0;
+
+    for (long i = 1; i <= x; i++) {
+        sum += i;
+    }
+
+    return sum;
+}
+
+ULL_T getFactorial(const long x) {
+    ULL_T result = 1;
+    ULL_T prevResult = 1;
+
+    for (int i = 2; i <= x; i++) {
+        prevResult = result;
+        result *= i;
+
+        if (result / i != prevResult) {
+            return 0;
+        }
+    }
+
+    return result;
+}
