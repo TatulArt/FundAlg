@@ -21,7 +21,7 @@ target_link_libraries(build PRIVATE myMath)
 
 # Базовые флаги компиляции для C
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
-    target_compile_options(my_app PRIVATE -Wall -Wextra -pedantic)
+    target_compile_options(build PRIVATE -Wall -Wextra -pedantic)
 
 endif()
 
