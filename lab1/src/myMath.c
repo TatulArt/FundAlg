@@ -109,10 +109,11 @@ void printPowerTableXRow(const long x) {
 
     for (int i = 0; i < 10; i++) {
         row[i] = i + 1;
-        printf("%ld", row[i]);
 
-        for (int j = 0; j <= 2 + x / 2; j++) {
-            printf(" ");
+        if (i == 0) {
+            printf("%ld", row[i]);
+        } else {
+            printf(" %11ld", row[i]);
         }
     }
 
@@ -121,10 +122,11 @@ void printPowerTableXRow(const long x) {
     for (int i = 0; i < (x - 1); i++) {
         for (int j = 0; j < 10; j++) {
             row[j] = row[j] * (j + 1);
-            printf("%ld ", row[j]);
 
-            for (int t = 0; t <= (x - i) / 2; t++) {
-                printf(" ");
+            if (j == 0) {
+                printf("%ld", row[j]);
+            } else {
+                printf(" %11ld", row[j]);
             }
         }
 
