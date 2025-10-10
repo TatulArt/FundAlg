@@ -5,8 +5,13 @@
 #ifndef MYMATH_H
 #define MYMATH_H
 
-static char *validationStatus[] = {
-    "Неизвестная ошибка, анлак :(",
+#include <ctype.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+static char *statusDescriptions[] = {
+    "OK",
     "Использование программы: ./build <x> <флаг>",
     "Превышение ограничения памяти",
     "Неизвестный флаг",
@@ -14,11 +19,12 @@ static char *validationStatus[] = {
     "Некорректный формат флага. Флаг должен состоять из одного символа латинского алфавита в нижнем регистре",
     "Некорректный формат x. Число должно состоять только из арабских цифр и не содержать ведущих нулей",
     "Ожидалось натуральное значение x",
-    "Некорректный ввод: Для вывода таблицы степеней, введите значение x в диапазоне [1, 10]"
+    "Некорректный ввод: Для вывода таблицы степеней, введите значение x в диапазоне [1, 10]",
+    "Неизвестная ошибка, анлак :("
 };
 
-enum Errors {
-    UNKNOWN_ERROR,
+enum StatusCodes {
+    OK,
     WRONG_ARG_AMOUNT,
     OUT_OF_MEMORY,
     UNKNOWN_FLAG,
@@ -27,6 +33,7 @@ enum Errors {
     INVALID_VALUE,
     VALUE_NOT_NATURAL,
     POWER_TABLE_OUT_OF_RANGE,
+    UNKNOWN_ERROR
 };
 
 long convertStrToLong(const char *str);

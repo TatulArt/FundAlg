@@ -1,11 +1,28 @@
 #include "../include/myMath.h"
 
-#include <ctype.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #define ULL_T unsigned long long
+
+int validateNumInStr(const char *str) {
+    short int strLen = 0;
+
+    for (short int i = 0; str[i] != '\0'; i++) {
+        strLen++;
+
+        if (!(str[i] >= '0' && str[i] <= '9') && str[0] != '-') {
+            return INVALID_VALUE;
+        }
+    }
+
+    if (strLen > 10) {
+        return OUT_OF_MEMORY;
+    }
+
+    if (str[0] == '0') {
+        return INVALID_VALUE;
+    }
+
+    return OK;
+}
 
 // Перевод x в long из строкового представления
 long convertStrToLong(const char *str) {
@@ -20,30 +37,16 @@ long convertStrToLong(const char *str) {
     return conv;
 }
 
-int validateNumInStr(const char *str) {
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '-') {
-            return -1;
-        }
-    }
-
-    if (str[0] == '0') {
-        return -1;
-    }
-
-    return 0;
-}
-
 int validateFlag(const char *flag) {
     if (flag[0] != '-' && flag[0] != '/') {
-        return -1;
+        return INVALID_FLAG_START;
     }
 
     if (!(flag[1] >= 'a' && flag[1] <= 'z') || flag[2] != '\0') {
-        return -2;
+        return INVALID_FLAG_VALUE;
     }
 
-    return 0;
+    return OK;
 }
 
 // Вывод всех чисел в пределах 100 (включительно), кратных x в терминал
@@ -81,7 +84,7 @@ int getNumLengthInNumSys(long x, const int base) {
 }
 
 void printNumInHex(long x) {
-    int n = getNumLengthInNumSys(x, 16);
+    const int n = getNumLengthInNumSys(x, 16);
     char *result = (char *) malloc(n * sizeof(char));
 
     const char *alphabet = "0123456789ABCDEF";
