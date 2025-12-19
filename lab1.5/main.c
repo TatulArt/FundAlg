@@ -15,6 +15,7 @@ int main(int argc, const char* argv[]){
     char flag = '\0';
     char * outputFile;
     ParseFlagStatus flagStatus = ParseFlag(argv[1], &flag, &nExist);
+
     switch (flagStatus) {
     case FLAG_PARSED:
         break;
@@ -25,6 +26,7 @@ int main(int argc, const char* argv[]){
     printf("Second argument is not a flag: %s\n", argv[1]);
         return INVALID_INPUT;
     }
+
     if (nExist == true){
         if (argc != 4){
             printf("Must be 3 args with 'n' in flag\n");
@@ -37,7 +39,7 @@ int main(int argc, const char* argv[]){
         }
         outputFile[0] = '\0';
         strcat(outputFile, argv[3]);
-    } else{
+    } else {
         if (argc != 3){
             printf("Must be 2 args without 'n' in flag\n");
             return INVALID_INPUT;

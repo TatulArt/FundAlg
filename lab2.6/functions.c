@@ -1,4 +1,4 @@
-#include "def.h"
+#include "functions.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -72,13 +72,7 @@ ReadStatus readStudents(const char *filename, int *count, Student* students, int
             free(temp.marks);
             continue;
         }
-        // for (int i = 0; i < 5; i++) {
-        //     if(isdigit(temp.marks[i])){
-        //     temp.marks[i] = temp.marks[i] -'0';
-        //     } else {
-        //         temp.marks[i] = temp.marks[i] - (char)'A' + 5;
-        //     }
-        // }
+
         if (size >= *capacity) {
             *capacity *= 2;
             Student *newStudents = realloc(students, *capacity * sizeof(Student));
@@ -135,6 +129,7 @@ void searchBySurname(Student *students, int count, const char *surname) {
         if (strcmp(studentLower, searchLower) == 0) {
             printStudent(&students[i]);
             found = 1;
+            break;
         }
     }
     if (!found) {
@@ -157,6 +152,7 @@ void searchByName(Student *students, int count, const char *name) {
         if (strcmp(studentLower, searchLower) == 0) {
             printStudent(&students[i]);
             found = 1;
+            break;
         }
     }
     if (!found) {
@@ -170,6 +166,7 @@ void searchByGroup(Student *students, int count, const char *group) {
         if (strcmp(students[i].group, group) == 0) {
             printStudent(&students[i]);
             found = 1;
+            break;
         }
     }
     if (!found) {

@@ -37,6 +37,7 @@ void RemoveNumbers(FILE* inpFile, FILE* outFile){
 
 void CountLetters(FILE* inpFile, FILE* outFile){
     char c;
+
     long countedLetters = 0;
       while (!feof(inpFile)) {
         c = fgetc(inpFile);
@@ -84,8 +85,12 @@ ReplaceStatus replaceWithHex(FILE *inpFile, FILE *outFile){
     }
     return REPLACE_OK;
 }
-
+/*
 HexStatus ToHex(int number, char *HexDigits) {
+    if (number == 0) {
+      return 0;
+    }
+
     int temp = number;
     int i = 0;
     while (temp > 0) {
@@ -109,7 +114,38 @@ HexStatus ToHex(int number, char *HexDigits) {
     return HEX_OK;
     }
 
+*/
 
+HexStatus ToHex(int number, char *HexDigits) {
+    if (number < 0 || number > 255) {
+        return HEX_OVERFLOW;
+    }
+
+    // Для числа 0
+    if (number == 0) {
+        HexDigits[0] = '0';
+        HexDigits[1] = '0';
+        HexDigits[2] = '\0';
+        return HEX_OK;
+    }
+
+    int i = 1;  // Начинаем с младшего разряда
+    char hex_chars[] = "0123456789ABCDEF";
+
+    while (number > 0 && i >= 0) {
+        int digit = number % 16;
+        HexDigits[i--] = hex_chars[digit];
+        number /= 16;
+    }
+
+    // Если остался старший разряд (число было < 16)
+    if (i == 0) {
+        HexDigits[0] = '0';
+    }
+
+    HexDigits[2] = '\0';
+    return HEX_OK;
+}
 
 
 
