@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include <math.h>
 
+
+
 ParseFlagStatus ParseFlag(const char *InputedFlag, char *flag, bool *nExist) {
     if (InputedFlag[0] != '-' && InputedFlag[0] != '/'){
         return NOT_A_FLAG;
@@ -85,36 +87,6 @@ ReplaceStatus replaceWithHex(FILE *inpFile, FILE *outFile){
     }
     return REPLACE_OK;
 }
-/*
-HexStatus ToHex(int number, char *HexDigits) {
-    if (number == 0) {
-      return 0;
-    }
-
-    int temp = number;
-    int i = 0;
-    while (temp > 0) {
-        ++i;
-        temp /= 16;
-    }
-    if (i-- > 2){
-        return HEX_OVERFLOW;
-    }
-    temp = number;
-    while (temp > 0) {
-        int HexDigit = temp % 16;
-        if (HexDigit < 10) {
-            *(HexDigits + i--) = ("%c", '0' + HexDigit);
-        } else {
-            *(HexDigits + i--) = ("%c", 'A' + HexDigit - 10);
-        }
-        temp/=16;
-    }
-    *(HexDigits + i) = '\0';
-    return HEX_OK;
-    }
-
-*/
 
 HexStatus ToHex(int number, char *HexDigits) {
     if (number < 0 || number > 255) {

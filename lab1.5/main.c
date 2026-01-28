@@ -53,6 +53,12 @@ int main(int argc, const char* argv[]){
         strcat(outputFile, "out_");
         strcat(outputFile, argv[2]);
     }
+
+    if (strcmp(outputFile, argv[2]) == 0) {
+        printf("Output and input files have identical names\n");
+        return INVALID_INPUT;
+    }
+
     FILE *inpFile;
     if ((inpFile = fopen(argv[2], "r")) == NULL) {
         printf("There is an error opening input file |%s|\n", argv[2]);

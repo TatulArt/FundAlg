@@ -20,6 +20,11 @@ ParseNumberStatus ParseNumber(const char *StrNumber, int *number) {
     if (StrNumber == NULL || number == NULL) {
         return NUMBER_NULL_PTR;
     }
+
+    if (strlen(StrNumber) > 10) {
+        return NUMBER_INT_OVERFLOW;
+    }
+
     char *endptr;
     long long lgnum = strtoll(StrNumber, &endptr, 10);
     if (*endptr != '\0') {
@@ -35,6 +40,9 @@ ParseNumberStatus ParseNumber(const char *StrNumber, int *number) {
 ParseNumberStatus ValidateFloat(const char *StrNumber, double *Fnumber) {
     if (StrNumber == NULL || Fnumber == NULL) {
         return NUMBER_NULL_PTR;
+    }
+    if (strlen(StrNumber) > 10) {
+        return DOUBLE_OVERFLOW;
     }
     char *endptr;
     double dubN = strtod(StrNumber, &endptr);

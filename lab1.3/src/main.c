@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, const char* argv[]){
     char flag = '\0';
@@ -19,7 +20,6 @@ int main(int argc, const char* argv[]){
         printf("Too many args\n");
         return INVALID_INPUT;
     }
-
 
     ParseFlagStatus flagStatus = ParseFlag(argv[1], &flag);
 

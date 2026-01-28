@@ -14,7 +14,7 @@ int main(int argc, const char* argv[]){
     }
     free(ans);
 
-    CheckNumbersStatus checkStatus2 = check_numbers(&ans, 2, 255, 1.0/255, 0.5);
+    CheckNumbersStatus checkStatus2 = check_numbers(&ans, 2, 255, 1.0/255, 1/51.0, 0.5);
     if (StatusProcessing(checkStatus2) == OK_PROC){
         for (int i = 0; i < 2; ++i) {
             printf("%d ", ans[i]);
