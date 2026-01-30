@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <math.h>
 
+
 ArgsStatus NumberOfArgs(int argc){
     if (argc < 4){
         return TOO_FEW_ARGS;
@@ -94,11 +95,19 @@ EqSolutions EquationSolve(double e, double a, double b, double c, double *result
     }
 
     const double d = b*b - 4 * a * c;
-    if (d < 0) {
-        return NO_SOLUTIONS;
+
+    if (d < 0) { // Комплексные корни
+        if ((-1 * d) < e) {
+            return NO_SOLUTIONS;
+        } else {
+            result[0] = -b / (2 * a);
+            result[1] = sqrt(-d) / (2 * a);
+
+            return TWO_COMPLEX_SOLUTIONS;
+        }
     }
 
-    if (d < e) {
+    if (d > 0 && d < e) {
         if (fabs(c) < e){
             result[0] = 0;
         } else {
@@ -106,6 +115,7 @@ EqSolutions EquationSolve(double e, double a, double b, double c, double *result
         }
         return ONE_SOLUTION;
     }
+
 
     const double sqrtD = sqrt(d);
     result[0] = (-b + sqrtD) / (2 * a);
@@ -120,19 +130,24 @@ void PrintEquationRes(double *result, EqSolutions EqStatus, double a, double b, 
         return;
     }
     switch (EqStatus) {
-  case NO_SOLUTIONS:
-    printf("No solutions in equation.\n");
-    break;
-  case INF_SOLUTIONS:
-    printf("Infinite solutions in equation.\n");
-    break;
-  case ONE_SOLUTION:
-    printf("One solution in equation: %f\n", result[0]);
-    break;
-  case TWO_SOLUTIONS:
-    printf("Two solutions in equation: %f and %f\n", result[0], result[1]);
-    break;
-  }
+        case NO_SOLUTIONS:
+            printf("No solutions in equation.\n");
+            break;
+        case INF_SOLUTIONS:
+            printf("Infinite solutions in equation.\n");
+            break;
+        case ONE_SOLUTION:
+            printf("One solution in equation: %f\n", result[0]);
+            break;
+        case TWO_SOLUTIONS:
+            printf("Two solutions in equation: %f and %f\n", result[0], result[1]);
+            break;
+        case TWO_COMPLEX_SOLUTIONS:
+            printf("Two complex solutions in equation:\n");
+            printf("Solution 1: %f + %fi\n", result[0], result[1]);
+            printf("Solution 2: %f - %fi\n", result[0], result[1]);
+            break;
+    }
   printf("==========================================================================\n");
 }
 
@@ -157,7 +172,7 @@ TriangleStatus IsRightTriangle(double e, double a, double b, double c){
     return NOT_RIGHT;
 }
 
-void PrintUniqueRes(double FnumberE, double FnumberA, double FnumberB, double FnumberC, double * result){
+void PrintUniqueRes(double FnumberE, double FnumberA, double FnumberB, double FnumberC, double *result){
     if (result == NULL) {
         printf("Error: result pointer is NULL\n");
         return;

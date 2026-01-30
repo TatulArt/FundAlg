@@ -30,6 +30,7 @@ typedef enum{
     NO_SOLUTIONS,
     ONE_SOLUTION,
     TWO_SOLUTIONS,
+    TWO_COMPLEX_SOLUTIONS,
     EQ_NULL_PTR
 } EqSolutions;
 

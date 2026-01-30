@@ -123,7 +123,7 @@ int main(int argc, const char* argv[]){
                 return UNKNOWN_ERROR;
             }
 
-            double * result = malloc(sizeof(double) * 2);
+            double *result = malloc(sizeof(double) * 4);
             if (!result){
                 printf("Memory allocation error\n");
                 return MEMORY_ERROR;
