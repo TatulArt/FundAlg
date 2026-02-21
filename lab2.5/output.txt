@@ -1,0 +1,24 @@
+Hello World
+ABCDEFGHIJKLMNOPQRSTU                             VWXYZABCDEFGHIJKLMNOPQRSTUVWXY
+ZABCDEFGHIJKLMNOPQRSTUV
+ABCDEFGHIJKLMNOPQRSTU             VWXYZABCDEFGHIJ                KLMNOPQRSTUVWXY
+ZABCDEFGHIJKLMNOPQRSTUV
+ins many words and letters
+First     word     second     third     fourth     fifth      sixth      seventh
+eighth     ninth     tenth
+The quick brown fox jumps over the lazy dog. This famous  pangram  contains  all
+letters of the English alphabet and is used for testing fonts.
+word1 word2 word3
+a b c d e f g h i  j  k                 l  m  n  o  p  q  r  s  t  u  v  w  x  y
+zdfghgfdsfghgfdfgh
+one two three four five six seven eight nine ten
+abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+cdefghijklmnopqrstuvwxyz
+short  fghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+end
+NULL
+test
+
+word1 word2 word3
+String with !@#$%^&*() symbols and +-*/ operators and <>?{}[] brackets
+123 4567 89012 345678 901234 5678901 23456789 012345678 9012345678
