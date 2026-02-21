@@ -18,7 +18,7 @@ ArgsStatus NumberOfArgs(int argc){
 }
 
 ParseNumberStatus ParseNumber(const char *StrNumber, int *number) {
-    if (StrNumber == NULL || number == NULL) {
+    if (!StrNumber || !number) {
         return NUMBER_NULL_PTR;
     }
 
@@ -28,45 +28,56 @@ ParseNumberStatus ParseNumber(const char *StrNumber, int *number) {
 
     char *endptr;
     long long lgnum = strtoll(StrNumber, &endptr, 10);
+
     if (*endptr != '\0') {
         return NOT_DIGITS_IN_NUMBER;
     }
+
     if (lgnum > INT_MAX || lgnum < INT_MIN) {
         return NUMBER_INT_OVERFLOW;
     }
+
     *number = (int)lgnum;
     return OK_NUMBER;
 }
 
 ParseNumberStatus ValidateFloat(const char *StrNumber, double *Fnumber) {
-    if (StrNumber == NULL || Fnumber == NULL) {
+    if (!StrNumber || !Fnumber) {
         return NUMBER_NULL_PTR;
     }
+
     if (strlen(StrNumber) > 10) {
         return DOUBLE_OVERFLOW;
     }
+
     char *endptr;
     double dubN = strtod(StrNumber, &endptr);
+
     if (*endptr != '\0') {
         return NOT_DIGITS_IN_NUMBER;
     }
+
     if (isinf(dubN) || isnan(dubN)) {
         return DOUBLE_OVERFLOW;
     }
+
     *Fnumber = dubN;
     return OK_NUMBER;
 }
 
 ParseFlagStatus ParseFlag(const char *InputedFlag, char *flag) {
-    if (InputedFlag == NULL || flag == NULL) {
+    if (!InputedFlag || !flag) {
         return FLAG_NULL_PTR;
     }
+
     if (InputedFlag[0] != '-' && InputedFlag[0] != '/') {
         return NOT_A_FLAG;
     }
+
     if (InputedFlag[2] != '\0') {
         return UNKNOWN_FLAG;
     }
+
     *flag = InputedFlag[1];
     return FLAG_PARSED;
 }
@@ -97,14 +108,14 @@ EqSolutions EquationSolve(double e, double a, double b, double c, double *result
     const double d = b*b - 4 * a * c;
 
     if (d < 0) { // Комплексные корни
-        if ((-1 * d) < e) {
+        if (-d < e) {
             return NO_SOLUTIONS;
-        } else {
-            result[0] = -b / (2 * a);
-            result[1] = sqrt(-d) / (2 * a);
-
-            return TWO_COMPLEX_SOLUTIONS;
         }
+
+        result[0] = -b / (2 * a);
+        result[1] = sqrt(-d) / (2 * a);
+
+        return TWO_COMPLEX_SOLUTIONS;
     }
 
     if (d > 0 && d < e) {

@@ -13,7 +13,7 @@ int main(int argc, const char* argv[]){
     ReplaceStatus repStatus;
     bool nExist = false;
     char flag = '\0';
-    char * outputFile;
+    char* outputFile;
     ParseFlagStatus flagStatus = ParseFlag(argv[1], &flag, &nExist);
 
     switch (flagStatus) {

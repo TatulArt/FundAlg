@@ -51,7 +51,7 @@ long long convertToDecimal(const char* num_str, int base) {
     
     for (int i = startIndex; i < len; i++) {
         int digitValue = charToV(num_str[i]);
-        result = result * base + digitValue;
+        result = result * base + digitValue; // схема горнера (N = dn * b^n ... d2 * b^2 + d1 * b + d0)
         if (result < 0)
             return -1;
     }
