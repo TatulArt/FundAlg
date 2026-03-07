@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <limits.h>
 
 int main(int argc, const char* argv[]){
     if (argc < 2) {
@@ -54,8 +55,22 @@ int main(int argc, const char* argv[]){
         strcat(outputFile, argv[2]);
     }
 
-    if (strcmp(outputFile, argv[2]) == 0) {
-        printf("Output and input files have identical names\n");
+    char inputAbsPath[PATH_MAX];
+    char outputAbsPath[PATH_MAX];
+
+    if (realpath(argv[2], inputAbsPath) == NULL) {
+        perror("realpath error for first path");
+        return OPEN_FILE_ERROR;
+    }
+
+    if (realpath(outputFile, outputAbsPath) == NULL) {
+        perror("realpath error for second path");
+        return OPEN_FILE_ERROR;
+    }
+
+
+    if (strcmp(outputFile, argv[2]) == 0 || strcmp(inputAbsPath, outputAbsPath) == 0) {
+        printf("Output and input files have identical paths\n");
         return INVALID_INPUT;
     }
 
